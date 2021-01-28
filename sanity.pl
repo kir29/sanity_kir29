@@ -136,27 +136,33 @@ sub renameFile($$){
   # ls ß
   # 00000000: c39f 0a                                  ...
 
+  # ls ä.txt		mÄ.txt		mÖ.txt		mÜ.txt		ö.txt		ü.txt		ß.txt
+  # 00000000: 61cc 882e 7478 740a 6d41 cc88 2e74 7874  a...txt.mA...txt
+  # 00000010: 0a6d 4fcc 882e 7478 740a 6d55 cc88 2e74  .mO...txt.mU...t
+  # 00000020: 7874 0a6f cc88 2e74 7874 0a75 cc88 2e74  xt.o...txt.u...t
+  # 00000030: 7874 0ac3 9f2e 7478 740a                 xt....txt.
+
   # ls Ä
   # 00000000: 41cc 880a                                A...
-  $newfile =~ s/\x41cc880a/Ae/g;
+  #$newfile =~ s/\x41CC88/Ae/g;
+  $newfile =~ s/\x41\xcc\x88/Ae/g;
   # ls Ö
   # 00000000: 4fcc 880a                                O...
-  $newfile =~ s/\x4fcc880a/Oe/g;
+  $newfile =~ s/\x4F\xcc\x88/Oe/g;
   # ls Ü
   # 00000000: 55cc 880a                                U...
-  $newfile =~ s/\x55cc880a/Ue/g;
+  $newfile =~ s/\x55\xcc\x88/Ue/g;
   # ls ä
   # 00000000: 61cc 880a                                a...
-  $newfile =~ s/\x61cc880a/ae/g;
+  #$newfile =~ s/\x61CC88/ae/g;
+  $newfile =~ s/\x61\xcc\x88/ae/g;
   # ls ö
   # 00000000: 6fcc 880a                                o...
-  $newfile =~ s/\x6fcc880a/oe/g;
+  #$newfile =~ s/\x6FCC88/oe/g;
+  $newfile =~ s/\x6F\xcc\x88/oe/g;
   # ls ü
   # 00000000: 75cc 880a                                u...
-  $newfile =~ s/\x75cc880a/ue/g;
-  # ls ß
-  # 00000000: c39f 0a                                  ...
-  $newfile =~ s/\xc39f0a/ss/g;
+  $newfile =~ s/\x75\xcc\x88/ue/g;
 
   #Accents
   $newfile =~ s/é/e/g;
